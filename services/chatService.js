@@ -1,9 +1,9 @@
-import { firestore } from "../firebase/firebase.config"
+import { db } from "../firebase/firebase.config"
 import { collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "firebase/firestore"
 
 const sendMessage = async (channelId, message) => {
   try {
-    const messagesRef = collection(firestore, "channels", channelId, "messages");
+    const messagesRef = collection(db, "channels", channelId, "messages");
     await addDoc(messagesRef, {
       ...message,
       timestamp: serverTimestamp(),
@@ -16,7 +16,7 @@ const sendMessage = async (channelId, message) => {
 
 const getMessages = (channelId, callback) => {
   const messagesQuery = query(
-    collection(firestore, "channels", channelId, "messages"),
+    collection(db, "channels", channelId, "messages"),
     orderBy("timestamp", "asc")
   );
 

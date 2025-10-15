@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from "react"
 import { useAuth } from "./AuthContext"
-import { firestore } from "../firebase/firebase.config" // Corrected import
+import { db } from "../firebase/firebase.config" // Corrected import
 import { getMessages, sendMessage } from "../services/chatService" // Corrected import
 import { collection, doc, setDoc, onSnapshot, query, getDocs } from "firebase/firestore"
 
@@ -71,13 +71,13 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       { name: "beginners", description: "A friendly place for programming beginners" },
     ]
 
-    const channelsRef = collection(firestore, "channels")
+    const channelsRef = collection(db, "channels")
     const snapshot = await getDocs(channelsRef)
 
     if (snapshot.empty) {
       for (const channelData of defaultChannels) {
         const channelId = channelData.name.toLowerCase().replace(/\s+/g, "-")
-        const channelRef = doc(firestore, "channels", channelId)
+        const channelRef = doc(db, "channels", channelId)
         await setDoc(channelRef, channelData)
       }
     }
@@ -87,7 +87,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   useEffect(() => {
     seedChannels()
 
-    const q = query(collection(firestore, "channels"))
+    const q = query(collection(db, "channels"))
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const channelList = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Channel))
       setChannels(channelList)
@@ -148,7 +148,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   // Create a new channel
   const createChannel = async (channelData: Omit<Channel, 'id'>) => {
     const channelId = channelData.name.toLowerCase().replace(/\s+/g, "-")
-    const channelRef = doc(firestore, "channels", channelId)
+    const channelRef = doc(db, "channels", channelId)
     try {
       await setDoc(channelRef, channelData)
       setCurrentChannel({ id: channelId, ...channelData })
