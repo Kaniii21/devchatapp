@@ -13,7 +13,7 @@ import {
   signInWithRedirect,
   User,
 } from "firebase/auth"
-import { auth } from "@/services/firebase"
+import { auth } from "@/firebase/firebase.config.js"
 
 interface AuthContextType {
   user: User | null

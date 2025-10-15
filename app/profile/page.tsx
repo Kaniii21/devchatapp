@@ -14,7 +14,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { AlertCircle, Camera, Save } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { updateProfile } from "@/services/firebase"
+import { updateProfile } from "@/firebase/firebase.config.js"
 
 export default function ProfilePage() {
   const { user, loading } = useAuth()
