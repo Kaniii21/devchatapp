@@ -1,7 +1,3 @@
-Here’s your updated README with a **Demo link** section added:
-
----
-
 # 💬 AI-Powered Chat Application
 
 A full-stack chat app that integrates the Gemini API to deliver smart code debugging assistance. It also includes an analytics dashboard to track communication patterns and sentiment, plus a donation system to support ongoing development.
@@ -30,9 +26,6 @@ A full-stack chat app that integrates the Gemini API to deliver smart code debug
 ## 🔗 Demo
 
 Check out the live demo here: https://devchatapp-72ul2mdwo-kanika172110-gmailcoms-projects.vercel.app/
-
-> Replace the link above with your actual deployed URL (e.g., Vercel, Netlify, Firebase Hosting).
-
 ---
 
 ## 🛠️ Getting Started
@@ -91,7 +84,3 @@ Follow these steps to set up the project locally:
 ## 🤝 Contributing
 
 Contributions are welcome! Feel free to open issues or submit pull requests with ideas, improvements, or bug fixes.
-
----
-
-Want help writing a punchy tagline or deploying to Vercel? I’ve got you.
