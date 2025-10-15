@@ -8,8 +8,9 @@ import Sidebar from "@/components/Layout/Sidebar"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { BarChart, LineChart, PieChart } from "@/components/ui/chart"
+import { BarChart, LineChart, PieChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Pie, Cell } from "@/components/ui/chart"
 import { getSentimentAnalysis } from "@/utils/sentimentAnalysis"
+import { transformToLineChartData, transformToBarChartData, transformToPieChartData } from "@/lib/rechartsAdaptor"
 
 export default function AnalyticsPage() {
   const { user, loading } = useAuth()
@@ -58,23 +59,17 @@ export default function AnalyticsPage() {
       {
         label: "Positive",
         data: [65, 59, 80, 81, 56, 55, 70],
-        backgroundColor: "rgba(34, 197, 94, 0.2)",
         borderColor: "rgb(34, 197, 94)",
-        borderWidth: 2,
       },
       {
         label: "Neutral",
         data: [28, 48, 40, 19, 86, 27, 40],
-        backgroundColor: "rgba(59, 130, 246, 0.2)",
         borderColor: "rgb(59, 130, 246)",
-        borderWidth: 2,
       },
       {
         label: "Negative",
         data: [10, 20, 30, 15, 12, 8, 5],
-        backgroundColor: "rgba(239, 68, 68, 0.2)",
         borderColor: "rgb(239, 68, 68)",
-        borderWidth: 2,
       },
     ],
   }
@@ -86,8 +81,6 @@ export default function AnalyticsPage() {
         label: "Messages Sent",
         data: [12, 19, 3, 5, 2, 3, 9],
         backgroundColor: "rgba(99, 102, 241, 0.5)",
-        borderColor: "rgb(99, 102, 241)",
-        borderWidth: 1,
       },
     ],
   }
@@ -98,11 +91,13 @@ export default function AnalyticsPage() {
       {
         data: [60, 30, 10],
         backgroundColor: ["rgba(34, 197, 94, 0.7)", "rgba(59, 130, 246, 0.7)", "rgba(239, 68, 68, 0.7)"],
-        borderColor: ["rgb(34, 197, 94)", "rgb(59, 130, 246)", "rgb(239, 68, 68)"],
-        borderWidth: 1,
       },
     ],
   }
+
+  const lineChartData = transformToLineChartData(sentimentOverTime)
+  const barChartData = transformToBarChartData(messageActivity)
+  const pieChartData = transformToPieChartData(sentimentDistribution)
 
   return (
     <div className="flex h-screen flex-col">
@@ -146,17 +141,15 @@ export default function AnalyticsPage() {
                       <CardDescription>Distribution of message sentiment</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <PieChart
-                        data={sentimentDistribution}
-                        className="aspect-square"
-                        options={{
-                          plugins: {
-                            legend: {
-                              position: "bottom",
-                            },
-                          },
-                        }}
-                      />
+                      <PieChart data={pieChartData} className="aspect-square">
+                        <Pie dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
+                          {pieChartData.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={entry.fill} />
+                          ))}
+                        </Pie>
+                        <Tooltip />
+                        <Legend />
+                      </PieChart>
                     </CardContent>
                   </Card>
 
@@ -166,17 +159,16 @@ export default function AnalyticsPage() {
                       <CardDescription>How your communication sentiment has changed</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <LineChart
-                        data={sentimentOverTime}
-                        className="aspect-[2/1]"
-                        options={{
-                          scales: {
-                            y: {
-                              beginAtZero: true,
-                            },
-                          },
-                        }}
-                      />
+                      <LineChart data={lineChartData} className="aspect-[2/1]">
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        {sentimentOverTime.datasets.map(ds => (
+                          <Line key={ds.label} type="monotone" dataKey={ds.label} stroke={ds.borderColor} />
+                        ))}
+                      </LineChart>
                     </CardContent>
                   </Card>
                 </div>
@@ -223,17 +215,16 @@ export default function AnalyticsPage() {
                     <CardDescription>Number of messages sent over time</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <BarChart
-                      data={messageActivity}
-                      className="aspect-[3/2]"
-                      options={{
-                        scales: {
-                          y: {
-                            beginAtZero: true,
-                          },
-                        },
-                      }}
-                    />
+                    <BarChart data={barChartData} className="aspect-[3/2]">
+                       <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        {messageActivity.datasets.map(ds => (
+                          <Bar key={ds.label} dataKey={ds.label} fill={ds.backgroundColor} />
+                        ))}
+                    </BarChart>
                   </CardContent>
                 </Card>
 
