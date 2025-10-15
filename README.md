@@ -1,60 +1,87 @@
-# AI-Powered Chat Application
+Here’s the cleaned and properly formatted version of your README content for the AI-powered chat application:
 
-This is a full-stack chat application that uses AI to provide a smart debugging assistant. It also features a comprehensive analytics dashboard to track communication patterns and sentiment, and a donation system to support the project's development.
+---
 
-## Features
+# 💬 AI-Powered Chat Application
 
-*   **Real-time Chat:** Communicate with other users in real-time.
-*   **AI Debugging Assistant:** Get help with your code from an intelligent AI assistant.
-*   **Analytics Dashboard:** Visualize your communication patterns and sentiment with detailed charts and graphs.
-*   **Sentiment Analysis:** Track the sentiment of your messages over time.
-*   **Donation System:** Support the project by making a donation.
+A full-stack chat app that integrates the Gemini API to deliver smart code debugging assistance. It also includes an analytics dashboard to track communication patterns and sentiment, plus a donation system to support ongoing development.
 
-## Getting Started
+---
 
-To get started with the project, follow these steps:
+## 🚀 Features
 
-1.  **Clone the repository:**
+- **Real-time Chat with Firestore**  
+  Communicate instantly with other users via Firebase Firestore.
+
+- **AI Debugging with Gemini**  
+  Get intelligent code analysis, bug detection, and suggestions using the Gemini API.
+
+- **Analytics Dashboard**  
+  Visualize communication trends and sentiment with interactive charts and graphs.
+
+- **Sentiment Analysis**  
+  Monitor the emotional tone of your messages over time.
+
+- **Donation System**  
+  Support the project through integrated donation options.
+
+---
+
+## 🛠️ Getting Started
+
+Follow these steps to set up the project locally:
+
+1. **Clone the repository**
 
     ```bash
     git clone https://github.com/your-username/your-repository.git
     ```
 
-2.  **Install the dependencies:**
+2. **Install dependencies**
 
     ```bash
     npm install
     ```
 
-3.  **Set up your environment variables:**
+3. **Configure environment variables**
 
-    Create a `.env.local` file in the root of the project and add the following:
+    Create a `.env.local` file in the root directory and add:
 
+    ```env
+    NEXT_PUBLIC_FIREBASE_API_KEY=your-api-key
+    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-auth-domain
+    NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
+    NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-storage-bucket
+    NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
+    NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
+    NEXT_PUBLIC_GEMINI_API_KEY=your-gemini-api-key
     ```
-    NEXT_PUBLIC_FIREBASE_API_KEY="your-api-key"
-    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="your-auth-domain"
-    NEXT_PUBLIC_FIREBASE_PROJECT_ID="your-project-id"
-    NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="your-storage-bucket"
-    NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="your-messaging-sender-id"
-    NEXT_PUBLIC_FIREBASE_APP_ID="your-app-id"
-    ```
 
-4.  **Run the development server:**
+    👉 To get a Gemini API key, visit [Google AI Studio](https://aistudio.google.com/)
+
+4. **Run the development server**
 
     ```bash
     npm run dev
     ```
 
-    The application will be available at `http://localhost:3000`.
+    The app will be available at [http://localhost:3000](http://localhost:3000)
 
-## Technologies Used
+---
 
-*   **Next.js:** A React framework for building full-stack web applications.
-*   **Firebase:** A platform for building web and mobile applications.
-*   **Recharts:** A composable charting library built on React components.
-*   **Tailwind CSS:** A utility-first CSS framework for rapid UI development.
-*   **PrismJS:** A lightweight, extensible syntax highlighter.
+## 🧰 Technologies Used
 
-## Contributing
+- **Next.js** – Full-stack React framework  
+- **Firebase** – Real-time backend and authentication  
+- **Gemini API** – AI-powered code analysis  
+- **Recharts** – Charting library for analytics  
+- **Tailwind CSS** – Utility-first styling  
+- **PrismJS** – Syntax highlighting for code blocks
 
-Contributions are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request.
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests with ideas, improvements, or bug fixes.
+
+---
